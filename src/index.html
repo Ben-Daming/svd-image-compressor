@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVD图像压缩器 - 基于奇异值分解的图像压缩工具</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/homepage.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>SVD Image Compressor</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">首页</a>
+                <a href="#project" class="nav-link">项目说明</a>
+                <a href="#acknowledgments" class="nav-link">致谢</a>
+                <a href="main.html" class="nav-link">在线演示</a>
+                <a href="pages/svd-theory.html" class="nav-link">理论详解</a>
+            </div>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section id="home" class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    基于<span class="highlight">奇异值分解</span>的
+                    <br>智能图像压缩工具
+                </h1>
+                <p class="hero-subtitle">
+                    探索线性代数的力量，体验SVD算法如何在保持图像质量的同时实现高效压缩
+                </p>
+                <div class="hero-buttons">
+                    <a href="main.html" class="btn btn-primary">立即体验</a>
+                    <a href="pages/svd-theory.html" class="btn btn-secondary">了解原理</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="svd-animation">
+                    <div class="matrix-decomposition">
+                        <div class="matrix original">A</div>
+                        <div class="equals">=</div>
+                        <div class="matrix u">U</div>
+                        <div class="matrix sigma">Σ</div>
+                        <div class="matrix v">V<sup>T</sup></div>
+                    </div>
+                    <div class="compression-demo">
+                        <div class="image-placeholder original-img">
+                            <span>原图</span>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="image-placeholder compressed-img">
+                            <span>压缩后</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目说明 -->
+    <section id="project" class="project-section">
+        <div class="container">
+            <h2 class="section-title">项目说明</h2>
+            <div class="project-content">
+                <div class="author-info">
+                    <p><strong><a href="https://3b87dc08.quartz-b5m.pages.dev/" target="_blank" class="author-link">刘有度</a></strong> <span class="date">2025年5月31日</span></p>
+                </div>
+                <div class="project-description">
+                    <p>
+                        来到国科大这样一所重视数理基础的大学之后，主包发现基础代数课程的老师有的是算子派背景，强调通过算子这样更加本质而抽象的工具去严谨地学习数学定理，而在<strong>直观性和应用性</strong>上稍有欠缺。按照某线代A班级的讲义学习时，主包发现讲义对奇异值分解讲的比较粗略，新手学习时容易把奇异值分解当成一般路过的出题考点，却忽略它在现实情景中巨大的应用价值。实际上，奇异值分解被称为"线性代数皇冠上的明珠"。它在主包最近在学习的机器学习，模式识别等多个领域，都具有重大的实用价值。
+                    </p>
+                    <p>
+                        因此，主包认为，可视化奇异值分解的核心应用场景——图片压缩，在我们国科大，是一项有必要的科普工作，希望这个小网页能帮助到有志于从事人工智能/图形学等领域的小伙伴们。
+                    </p>
+                </div>
+                <div class="project-highlight">
+                    <div class="highlight-icon">💎</div>
+                    <h3>奇异值分解：线性代数皇冠上的明珠</h3>
+                    <p>从抽象理论到实际应用的完美桥梁</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 致谢 -->
+    <section id="acknowledgments" class="acknowledgments-section">
+        <div class="container">
+            <h2 class="section-title">致谢</h2>
+            <div class="acknowledgments-grid">
+                <div class="acknowledgment-card">
+                    <div class="ack-icon">👨‍🏫</div>
+                    <h4>助教老师杜昱</h4>
+                    <p>感谢助教老师杜昱提供的信息，让我确认了创新点</p>
+                </div>
+                
+                <div class="acknowledgment-card">
+                    <div class="ack-icon">📺</div>
+                    <h4>晓之车高山老师</h4>
+                    <p>感谢B站Up主"晓之车高山老师"的图说矩阵系列视频<a href="https://www.bilibili.com/video/BV1ExWxesEVf/?spm_id_from=333.337.search-card.all.click" target="_blank" class="video-link">奇异值分解</a>帮助我理解奇异值分解并提供可视化灵感来源</p>
+                </div>
+                
+                <div class="acknowledgment-card">
+                    <div class="ack-icon">🤖</div>
+                    <h4>GitHub Copilot</h4>
+                    <p>我实现奇异值分解的初版算法遇到了计算精度不够，10%以后的奇异值就因为计算精度问题自动变成0的问题，感谢copilot大大对算法精度的优化</p>
+                </div>
+                
+                <div class="acknowledgment-card">
+                    <div class="ack-icon">🧠</div>
+                    <h4>AI助手们</h4>
+                    <p>感谢grok3/claude4等AI不厌其烦地回复我的基础语法问题，感谢copilot自动填充log信息，极大地方便我调试，完成项目</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SVD Image Compressor</h3>
+                    <p>探索线性代数在图像处理中的应用，体验数学之美。</p>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="main.html">图像压缩工具</a></li>
+                        <li><a href="pages/svd-theory.html">理论详解</a></li>
+                        <li><a href="#project">项目说明</a></li>
+                        <li><a href="#acknowledgments">致谢</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>关键词</h4>
+                    <ul>
+                        <li>奇异值分解（SVD）</li>
+                        <li>矩阵低秩近似</li>
+                        <li>图像压缩算法</li>
+                        <li>线性代数应用</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>关于项目</h4>
+                    <p>本项目是一个教育性质的SVD图像压缩演示工具，帮助理解线性代数在实际应用中的价值。</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SVD Image Compressor. 用于教育和学习目的。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="scripts/homepage.js"></script>
+</body>
+</html>

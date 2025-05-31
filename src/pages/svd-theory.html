@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奇异值分解理论 - SVD Image Compressor</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/theory.css">
+</head>
+<body>
+    <!-- 侧边栏 -->
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3>导航菜单</h3>
+            <button id="closeSidebar" class="close-btn">&times;</button>
+        </div>
+        <div class="sidebar-content">
+            <nav>
+                <ul>
+                    <li><a href="../main.html" class="sidebar-link">图像压缩工具</a></li>
+                    <li><a href="svd-theory.html" class="sidebar-link active">奇异值分解理论</a></li>
+                    <li><a href="../index.html" class="sidebar-link">项目相关</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- 主要内容区域 -->
+    <div id="main-content" class="main-content">
+        <!-- 菜单按钮 -->
+        <button id="menuToggle" class="menu-toggle">☰</button>
+        
+        <div class="container">
+            <h1>奇异值分解（SVD）图像压缩原理</h1>
+            
+            <!-- 导航目录 -->
+            <div class="table-of-contents">
+                <h3>目录</h3>
+                <ul>
+                    <li><a href="#what-is-svd">什么是奇异值分解</a></li>
+                    <li><a href="#mathematical-foundation">数学基础</a></li>
+                    <li><a href="#image-compression">图像压缩应用</a></li>
+                    <li><a href="#compression-process">压缩过程详解</a></li>
+                    <li><a href="#advantages-disadvantages">优缺点分析</a></li>
+                    <li><a href="#practical-example">实际应用示例</a></li>
+                </ul>
+            </div>
+
+            <!-- 什么是SVD -->
+            <section id="what-is-svd" class="theory-section">
+                <h2>什么是奇异值分解（SVD）</h2>
+                <div class="content-box">
+                    <p>奇异值分解（Singular Value Decomposition，SVD）是线性代数中一种重要的矩阵分解技术。它可以将任意实数矩阵分解为三个特殊矩阵的乘积。</p>
+                    <p>这三个矩阵分别属于：</p>
+                    <ul>
+                        <li><strong>U</strong>：正交矩阵</li>
+                        <li><strong>Σ</strong>：对角矩阵(包含奇异值)</li>
+                        <li><strong>V<sup>T</sup></strong>：正交矩阵</li>
+                    </ul>
+                    <p>直观的解释:任何矩阵都可以看作:旋转（U）→缩放（Σ）→再次旋转（V<sup>T</sup>）。</p>
+                    <p>在图像处理中，SVD可以用来压缩图像数据，通过保留最重要的奇异值来减少存储空间，同时尽可能保留图像的主要信息。</p>
+                    <div class="highlight-box">
+                        <h4>核心思想</h4>
+                        <p>SVD的核心思想是找到数据中最重要的"方向"和"强度"，通过保留最重要的部分来近似原始数据，从而实现降维和压缩。</p>
+                    </div>
+
+                    <div class="formula-box">
+                        <h4>SVD公式</h4>
+                        <p>对于任意 m×n 实数矩阵 A，存在分解：</p>
+                        <div class="formula">A = U Σ V<sup>T</sup></div>
+                        <ul>
+                            <li><strong>U</strong>：m×m 正交矩阵（左奇异向量组）</li>
+                            <li><strong>Σ</strong>：m×n 对角矩阵（奇异值矩阵）</li>
+                            <li><strong>V<sup>T</sup></strong>：n×n 正交矩阵的转置（右奇异向量组）</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 数学基础 -->
+            <section id="mathematical-foundation" class="theory-section">
+                <h2>数学基础</h2>
+                <div class="content-box">
+                    <h3>奇异值的重要性</h3>
+                    <p>奇异值（Singular Values）按降序排列：σ₁ ≥ σ₂ ≥ ... ≥ σᵣ > 0</p>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4>能量集中性</h4>
+                            <p>前几个最大的奇异值通常包含了矩阵的大部分"能量"（信息）</p>
+                        </div>
+                        <div class="info-item">
+                            <h4>降维原理</h4>
+                            <p>通过保留前k个最大的奇异值，可以用较少的数据近似原始矩阵</p>
+                        </div>
+                        <div class="info-item">
+                            <h4>最优近似</h4>
+                            <p>SVD提供了在Frobenius范数意义下的最优低秩近似(Eckart-Young-Mirsky定理)</p>
+                        </div>
+                    </div>
+
+                    <div class="example-box">
+                        <h4>简单例子</h4>
+                        <p>
+                            假设有一个 4×4 的矩阵，其中每一行都非常相似，例如：
+                        </p>
+                        <pre style="background:#fff;border-radius:4px;padding:10px 15px;margin:10px 0;font-size:15px;">
+A = [
+  [10, 10, 10, 10],
+  [11, 11, 11, 11],
+  [10, 10, 10, 10],
+  [12, 12, 12, 12]
+]
+                        </pre>
+                        <p>
+                            这个矩阵的行之间几乎没有差别，SVD分解后，只有第一个奇异值很大，其余奇异值接近于零。<br>
+                            这意味着我们只需保留第一个奇异值和对应的向量，就能用极少的数据近似还原原矩阵，大大减少存储空间。
+                        </p>
+                        <p>
+                            <strong>实际应用：</strong> 图像中如果存在大量重复或相似的区域，SVD压缩就能高效地去除冗余信息，实现有效压缩。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 图像压缩应用 -->
+            <section id="image-compression" class="theory-section">
+                <h2>SVD在图像压缩中的应用</h2>
+                <div class="content-box">
+                    <h3>图像作为矩阵</h3>
+                    <p>数字图像可以表示为像素值矩阵：</p>
+                    <ul>
+                        <li><strong>灰度图像</strong>：单个矩阵，每个元素代表像素亮度</li>
+                        <li><strong>彩色图像</strong>：三个矩阵（RGB通道），分别处理红、绿、蓝通道</li>
+                    </ul>
+
+                    <div class="process-flow">
+                        <h4>压缩流程</h4>
+                        <div class="flow-steps">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h5>矩阵分解</h5>
+                                    <p>将图像矩阵进行SVD分解</p>
+                                </div>
+                            </div>
+                            <div class="arrow">→</div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h5>选择奇异值</h5>
+                                    <p>保留前k个最大的奇异值</p>
+                                </div>
+                            </div>
+                            <div class="arrow">→</div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h5>重构图像</h5>
+                                    <p>使用选定的奇异值重建图像</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 压缩过程详解 -->
+            <section id="compression-process" class="theory-section">
+                <h2>压缩过程详解</h2>
+                <div class="content-box">
+                    <h3>数据存储需求</h3>
+                    
+                    <div class="comparison-table">
+                        <h4>存储空间对比</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>数据类型</th>
+                                    <th>存储需求</th>
+                                    <th>说明</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>原始图像</td>
+                                    <td>m × n</td>
+                                    <td>完整的像素矩阵</td>
+                                </tr>
+                                <tr>
+                                    <td>压缩数据</td>
+                                    <td>k × (m + n + 1)</td>
+                                    <td>k个奇异值及对应的向量</td>
+                                </tr>
+                                <tr>
+                                    <td>压缩比</td>
+                                    <td>mn / [k(m+n+1)]</td>
+                                    <td>原始大小与压缩大小的比值</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="formula-explanation">
+                        <h4>压缩效果分析</h4>
+                        <p><strong>能量保留</strong>：前k个奇异值保留的能量比例为：</p>
+                        <div class="formula">
+                            E = (σ₁² + σ₂² + ... + σₖ²) / (σ₁² + σ₂² + ... + σᵣ²) × 100%
+                        </div>
+                        <p>通常前10-20%的奇异值就能保留90%以上的图像信息。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 优缺点分析 -->
+            <section id="advantages-disadvantages" class="theory-section">
+                <h2>SVD图像压缩的优缺点</h2>
+                <div class="content-box">
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h3>优点</h3>
+                            <ul>
+                                <li><strong>理论最优</strong>：在最小二乘意义下提供最佳低秩近似(Eckart-Young-Mirsky定理)</li>
+                                <li><strong>压缩可控</strong>：可以精确控制保留的信息量</li>
+                                <li><strong>理论基础</strong>：有坚实的数学理论支撑</li>
+                                <li><strong>渐进重构</strong>：可以逐步增加细节，适合渐进式传输</li>
+                                <li><strong>去噪高效</strong>：自然过滤掉高频噪声</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h3>缺点</h3>
+                            <ul>
+                                <li><strong>计算复杂</strong>：SVD分解的计算成本较高</li>
+                                <li><strong>分解耗时</strong>：分解过程耗时，不适合实时应用</li>
+                                <li><strong>存储开销</strong>：需要存储三个矩阵的系数</li>
+                                <li><strong>压缩有损</strong>：无法完全恢复原始图像</li>
+                                <li><strong>整体处理</strong>：必须处理整幅图像，不支持分块处理</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 实际应用示例 -->
+            <section id="practical-example" class="theory-section">
+                <h2>实际应用示例</h2>
+                <div class="content-box">
+                    <h3>应用场景</h3>
+                    <div class="application-grid">
+                        <div class="app-item">
+                            <h4>图像存储</h4>
+                            <p>在存储空间有限时，可以用SVD压缩重要图像，保持较高的视觉质量。</p>
+                        </div>
+                        <div class="app-item">
+                            <h4>数据传输</h4>
+                            <p>在网络带宽有限的情况下，先传输主要的奇异值，再逐步传输细节。</p>
+                        </div>
+                        <div class="app-item">
+                            <h4>提取特征</h4>
+                            <p>提取图像的主要特征，用于模式识别和机器学习。</p>
+                        </div>
+                        <div class="app-item">
+                            <h4>图像去噪</h4>
+                            <p>通过保留主要奇异值，自然地去除图像中的噪声。</p>
+                        </div>
+                    </div>
+
+                    <div class="parameter-guide">
+                        <h3>参数选择指南</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>保留奇异值比例</th>
+                                    <th>预期效果</th>
+                                    <th>适用场景</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>90-100%</td>
+                                    <td>几乎无损，高质量</td>
+                                    <td>重要图像存储</td>
+                                </tr>
+                                <tr>
+                                    <td>50-90%</td>
+                                    <td>良好质量，明显压缩</td>
+                                    <td>一般用途</td>
+                                </tr>
+                                <tr>
+                                    <td>20-50%</td>
+                                    <td>可接受质量，高压缩比</td>
+                                    <td>预览图、缩略图</td>
+                                </tr>
+                                <tr>
+                                    <td>5-20%</td>
+                                    <td>低质量，极高压缩比</td>
+                                    <td>快速预览、特征提取</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="try-it-box">
+                        <h3>动手实践</h3>
+                        <p>你已经了解了SVD图像压缩的原理，回到主页面试试实际的压缩效果吧！</p>
+                        <a href="../main.html" class="try-button">返回压缩工具</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="../scripts/sidebar.js"></script>
+</body>
+</html>
