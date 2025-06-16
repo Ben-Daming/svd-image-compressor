@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 70; // 考虑导航栏高度
+                const offsetTop = targetSection.offsetTop - 70; 
                 window.scrollTo({
                     top: offsetTop,
                     behavior: 'smooth'
@@ -43,24 +43,25 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', function() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        // 添加背景模糊效果
         if (scrollTop > 50) {
-            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            navbar.style.background = 'rgba(255, 255, 255, 0.1)'; 
+            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
         } else {
-            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            navbar.style.background = 'rgba(255, 255, 255, 0.05)'; 
             navbar.style.boxShadow = 'none';
         }
         
         lastScrollTop = scrollTop;
     });
 
-    // 添加页面加载动画
+    // 页面加载动画
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
+                entry.target.style.opacity = '0.9'; 
                 entry.target.style.transform = 'translateY(0)';
+                entry.target.style.background = 'rgba(255, 255, 255, 0.05)';
+                entry.target.style.backdropFilter = 'blur(10px)'; 
             }
         });
     }, {
@@ -77,15 +78,22 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 
-    // SVD矩阵动画增强
+    // SVD矩阵动画
     const matrices = document.querySelectorAll('.matrix');
     matrices.forEach((matrix, index) => {
+        // 初始设置透明背景
+        matrix.style.background = 'rgba(255, 255, 255, 0.1)';
+        matrix.style.backdropFilter = 'blur(10px)';
+        matrix.style.border = '1px solid rgba(255, 255, 255, 0.3)';
+        
         matrix.addEventListener('mouseenter', function() {
             this.style.transform = 'scale(1.1) rotate(5deg)';
+            this.style.background = 'rgba(255, 255, 255, 0.2)'; /* 悬停时稍微增加不透明度 */
         });
         
         matrix.addEventListener('mouseleave', function() {
             this.style.transform = 'scale(1) rotate(0deg)';
+            this.style.background = 'rgba(255, 255, 255, 0.1)'; 
         });
     });
 
@@ -93,9 +101,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const compressedImg = document.querySelector('.compressed-img');
     if (compressedImg) {
         setInterval(() => {
-            compressedImg.style.opacity = '0.6';
+            compressedImg.style.opacity = '0.3'; 
             setTimeout(() => {
-                compressedImg.style.opacity = '1';
+                compressedImg.style.opacity = '0.7'; 
             }, 500);
         }, 3000);
     }
@@ -121,7 +129,6 @@ function createParticleBackground() {
         z-index: 0;
     `;
 
-    // 创建粒子
     for (let i = 0; i < 50; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
@@ -129,7 +136,8 @@ function createParticleBackground() {
             position: absolute;
             width: 4px;
             height: 4px;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgb(238, 203, 230);; 
+            box-shadow: 0 0 5px rgb(247, 7, 191); /* 添加轻微发光效果 */
             border-radius: 50%;
             animation: float ${3 + Math.random() * 4}s ease-in-out infinite;
             left: ${Math.random() * 100}%;
@@ -147,11 +155,9 @@ function createParticleBackground() {
         @keyframes float {
             0%, 100% {
                 transform: translateY(0px) translateX(0px);
-                opacity: 0.3;
             }
             50% {
                 transform: translateY(-20px) translateX(10px);
-                opacity: 0.6;
             }
         }
     `;
@@ -168,13 +174,14 @@ mobileNavStyle.textContent = `
             left: -100%;
             width: 100%;
             height: calc(100vh - 70px);
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1); /* 改为10%透明度 */
+            backdrop-filter: blur(15px); /* 增加模糊效果 */
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
             padding-top: 50px;
             transition: left 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2); /* 添加轻微边框 */
         }
         
         .nav-menu.active {
@@ -184,6 +191,18 @@ mobileNavStyle.textContent = `
         .nav-link {
             font-size: 1.2rem;
             padding: 15px 0;
+            color: #333; /* 确保文字可见 */
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); /* 添加文字阴影 */
+        }
+        
+        .nav-toggle {
+            background: rgba(255, 255, 255, 0.1); /* 菜单按钮透明背景 */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-toggle span {
+            background: #333; /* 确保线条可见 */
         }
         
         .nav-toggle.active span:nth-child(1) {
@@ -200,3 +219,30 @@ mobileNavStyle.textContent = `
     }
 `;
 document.head.appendChild(mobileNavStyle);
+
+// 添加全局透明化功能
+function makeElementsTransparent() {
+    // 为所有动画元素添加透明背景
+    const animateElements = document.querySelectorAll('.feature-card, .timeline-item, .demo-description');
+    animateElements.forEach(el => {
+        el.style.background = 'rgba(255, 255, 255, 0.05)';
+        el.style.backdropFilter = 'blur(10px)';
+        el.style.border = '1px solid rgba(255, 255, 255, 0.2)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease, background 0.3s ease';
+        
+        // 添加悬停效果
+        el.addEventListener('mouseenter', function() {
+            this.style.background = 'rgba(255, 255, 255, 0.1)';
+        });
+        
+        el.addEventListener('mouseleave', function() {
+            this.style.background = 'rgba(255, 255, 255, 0.05)';
+        });
+    });
+}
+
+// 在DOM加载完成后执行透明化
+document.addEventListener('DOMContentLoaded', function() {
+    // 执行透明化
+    makeElementsTransparent();
+});

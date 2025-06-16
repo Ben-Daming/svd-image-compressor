@@ -8,7 +8,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
     color: #333;
-    background: #fff;
+    background: transparent;
 }
 
 /* 导航栏 */
@@ -16,7 +16,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.95);
+    background: transparent;
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     z-index: 1000;
@@ -80,14 +80,14 @@ body {
 .nav-toggle span {
     width: 25px;
     height: 3px;
-    background: #333;
+    background: transparent;
     margin: 3px 0;
     transition: 0.3s;
 }
 
 .hero-section {
     min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #667eea 0%, transparent 100%);
     display: flex;
     align-items: center;
     color: white;
@@ -331,7 +331,7 @@ body {
 /* 功能特点 */
 .features-section {
     padding: 100px 0;
-    background: #f8f9fa;
+    background: rgba(248, 249, 250, 0.3); 
 }
 
 .features-grid {
@@ -341,17 +341,19 @@ body {
 }
 
 .feature-card {
-    background: white;
+    background: rgba(255, 255, 255, 0.2); 
     padding: 40px 30px;
     border-radius: 15px;
     text-align: center;
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(10px); 
 }
 
 .feature-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .feature-icon {
@@ -374,7 +376,7 @@ body {
 /* 工作原理 */
 .how-it-works-section {
     padding: 100px 0;
-    background: white;
+    background: rgba(255, 255, 255, 0.3); 
 }
 
 .process-timeline {
@@ -435,7 +437,9 @@ body {
 /* 演示区域 */
 .demo-section {
     padding: 100px 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: linear-gradient(135deg, 
+        rgba(248, 249, 250, 0.3) 0%, 
+        rgba(233, 236, 239, 0.3) 100%);
 }
 
 .demo-preview {
@@ -482,21 +486,22 @@ body {
 }
 
 .mockup-window {
-    background: white;
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
     overflow: hidden;
     width: 100%;
     max-width: 400px;
+    backdrop-filter: blur(10px); 
 }
 
 .mockup-header {
-    background: #f8f9fa;
+    background: rgba(248, 249, 250, 0.3);
     padding: 15px 20px;
     display: flex;
     align-items: center;
     gap: 15px;
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid rgba(222, 226, 230, 0.3);
 }
 
 .mockup-buttons {
@@ -575,12 +580,12 @@ body {
 
 .mockup-image {
     aspect-ratio: 1;
-    border: 1px solid #dee2e6;
+    border: 1px solid rgba(222, 226, 230, 0.3);
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f8f9fa;
+    background: rgba(248, 249, 250, 0.2); 
     color: #666;
     font-size: 0.9rem;
 }
@@ -588,7 +593,7 @@ body {
 /* 项目说明样式 */
 .project-section {
     padding: 100px 0;
-    background: #f8f9fa;
+    background: rgba(248, 249, 250, 0.3); 
 }
 
 .project-content {
@@ -600,9 +605,10 @@ body {
     text-align: center;
     margin-bottom: 40px;
     padding: 20px;
-    background: white;
+    background: rgba(255, 255, 255, 0.2); 
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px); 
 }
 
 .author-info p {
@@ -622,7 +628,7 @@ body {
 }
 
 .project-description {
-    background: white;
+    background: rgba(255, 255, 255, 0.2);
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
@@ -643,12 +649,15 @@ body {
 }
 
 .project-highlight {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, 
+        rgba(102, 126, 234, 0.3) 0%, 
+        rgba(118, 75, 162, 0.3) 100%); 
     color: white;
     padding: 30px;
     border-radius: 15px;
     text-align: center;
     box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    backdrop-filter: blur(10px); 
 }
 
 .highlight-icon {
@@ -669,7 +678,7 @@ body {
 /* 致谢样式 */
 .acknowledgments-section {
     padding: 100px 0;
-    background: white;
+    background: rgba(255, 255, 255, 0.3); 
 }
 
 .acknowledgments-grid {
@@ -680,7 +689,7 @@ body {
 }
 
 .acknowledgment-card {
-    background: #f8f9fa;
+    background: rgba(248, 249, 250, 0.2);
     padding: 30px 25px;
     border-radius: 15px;
     text-align: center;
@@ -691,7 +700,8 @@ body {
 .acknowledgment-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-    border-color: #007bff;
+    border-color: rgba(0, 123, 255, 0.5); 
+    background: rgba(248, 249, 250, 0.3); 
 }
 
 .ack-icon {
@@ -726,9 +736,16 @@ body {
 
 /* 页脚样式 */
 .footer {
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    background: linear-gradient(135deg, 
+        rgba(44, 62, 80, 0.8) 0%, 
+        rgba(52, 73, 94, 0.8) 100%); 
     color: white;
     padding: 60px 0 20px;
+}
+
+.footer * {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
+    color:#ebe8e4 !important;
 }
 
 .footer-content {
@@ -753,12 +770,15 @@ body {
 
 /* 让快速链接更显眼 */
 .footer-section:nth-child(2) {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, 
+        rgba(102, 126, 234, 0.7) 0%, 
+        rgba(118, 75, 162, 0.7) 100%);
     padding: 25px;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
     transform: translateY(-10px);
     border: 2px solid rgba(255, 215, 0, 0.3);
+    backdrop-filter: blur(10px); 
 }
 
 .footer-section:nth-child(2) h4 {

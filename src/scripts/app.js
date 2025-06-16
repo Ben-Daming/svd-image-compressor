@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function displayOriginalInfo(width, height) {
         if (analysisContainer) {
             analysisContainer.innerHTML = `
-                <div class="info-section">
+                <div class="info-section" style="background:transparent;">
                     <h4>原图信息</h4>
                     <p>处理尺寸: ${width} × ${height} 像素</p>
                     <p>原图存储空间: ${(width * height * 3)} 字节 (${((width * height * 3) / 1024).toFixed(1)} KB)</p>
@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 计算能量比例
     function calculateEnergyRatio(rS, gS, bS, k) {
         const calculateChannelEnergyUltraHighPrecision = (S, k) => {
-            // 使用对数空间计算避免下溢
+            // debug:使用对数空间计算避免变成0
             const logSSquared = S.map(s => s > 1e-100 ? 2 * Math.log(Math.abs(s)) : -200);
             
             // 找到最大的对数值用于归一化
@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 初始化动画显示
     function initializeAnimationDisplay(targetK) {
         compressedContainer.innerHTML = `
-            <div class="animation-status">
+            <div class="animation-status" style="background:transparent;">
                 <h4>SVD重构动画进行中...</h4>
                 <p id="animation-progress">准备开始...</p>
             </div>
@@ -333,11 +333,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const progressPercentage = (currentK / totalK) * 100;
         
         compressedContainer.innerHTML = `
-            <div class="animation-status">
+            <div class="animation-status" style="background:transparent;">
                 <h4>SVD重构动画进行中...</h4>
                 <p>当前使用奇异值: ${currentK} / ${totalK} (${progressPercentage.toFixed(1)}%)</p>
             </div>
-            <div class="compressed-image-display">
+            <div class="compressed-image-display" style="background:transparent;">
                 <img src="${imageSrc}" style="max-width: 400px; transition: opacity 0.1s ease-in-out;" alt="压缩图片第${currentK}帧">
             </div>
         `;
@@ -348,18 +348,9 @@ document.addEventListener('DOMContentLoaded', function() {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    // 显示压缩图片(废函数,备用)
-    function displayCompressedImage(src) {
-        compressedContainer.innerHTML = '';
-        const compressedImg = document.createElement('img');
-        compressedImg.src = src;
-        compressedImg.style.maxWidth = '400px';
-        compressedContainer.appendChild(compressedImg);
-    }
-
-    // 精度诊断报告
+    // 精度报告
     function diagnosePrecisionIssues(S, k) {
-        console.log('=== 精度诊断报告 ===');
+        console.log('=== 精度报告 ===');
         console.log('奇异值统计:');
         console.log('- 总数量:', S.length);
         console.log('- 使用数量:', k);
@@ -405,7 +396,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const compressedSize = Math.round(originalSize * storageRatio / 100);
 
         let analysisHTML = `
-            <div class="info-section">
+            <div class="info-section" style="background:transparent;">
                 <h4>原图信息</h4>
                 <p>处理尺寸: ${width} × ${height} 像素</p>
                 <p>原图存储空间: ${originalSize} 字节 (${(originalSize / 1024).toFixed(1)} KB)</p>
@@ -415,8 +406,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p><small>就暂且把显示的原图当作原图吧</small></p>
             </div>
             
-            <div class="info-section">
-                <h4>高精度压缩分析结果</h4>
+            <div class="info-section" style="background:transparent;">
+                <h4>SVD压缩分析</h4>
                 <p><strong>使用奇异值数量:</strong> ${kUsed} / ${totalK}</p>
                 <p><strong>奇异值能量保留比例:</strong> ${energyRatio.toFixed(6)}%</p>
                 <p><strong>压缩后理论存储空间:</strong> ${compressedSize} 字节 (${(compressedSize / 1024).toFixed(1)} KB)</p>
@@ -439,14 +430,14 @@ document.addEventListener('DOMContentLoaded', function() {
             );
 
             analysisHTML += `
-                <div class="info-section">
+                <div class="info-section" style="background:transparent;">
                     <h4>奇异值强度分布</h4>
-                    <div class="singular-values-chart">
+                    <div class="singular-values-chart" style="background:transparent;">
                         ${createSingularValuesChart(singularStrengths, kUsed)}
                     </div>
-                    <div class="singular-values-details">
-                        <p><strong>使用的前${Math.min(kUsed,10)}个奇异值详情:</strong></p>
-                        <div class="singular-values-list">
+                    <div class="singular-values-details" style="background:transparent;">
+                        <p><strong>使用的奇异值详情:</strong></p>
+                        <div class="singular-values-list" style="background:transparent;">
                             ${createSingularValuesDetailsList(usedSingularValues, singularValueEnergyRatios, kUsed)}
                         </div>
                         <p class="energy-summary">
@@ -462,14 +453,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 奇异值详细列表
     function createSingularValuesDetailsList(singularValues, energyRatios, kUsed) {
-        let listHTML = '<div class="singular-values-grid">';
+        let listHTML = '<div class="singular-values-grid" style="background:transparent;">';
         
         for (let i = 0; i < singularValues.length; i++) {
             const value = singularValues[i];
             const energyRatio = energyRatios[i];
             
             listHTML += `
-                <div class="singular-value-item">
+                <div class="singular-value-item" style="background:transparent;">
                     <span class="sv-index">σ${i + 1}:</span>
                     <span class="sv-value">${value.toFixed(4)}</span>
                     <span class="sv-energy">(${energyRatio.toFixed(2)}%)</span>
@@ -485,7 +476,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const top10Energy = energyRatios.slice(0, Math.min(10, kUsed)).reduce((sum, ratio) => sum + ratio, 0);
             
             listHTML += `
-                <div class="energy-breakdown">
+                <div class="energy-breakdown " style="background:transparent;">
                     <p><strong>能量分布汇总:</strong></p>
                     <ul>
                         ${kUsed >= 5 ? `<li>前5个奇异值占总能量: ${top5Energy.toFixed(2)}%</li>` : ''}
@@ -506,7 +497,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const displayValues = singularValues.slice(0, maxDisplay);
         const maxValue = Math.max(...displayValues);
         
-        let chartHTML = '<div class="chart-container">';
+        let chartHTML = '<div class="chart-container" style="background:transparent;">';
         
         for (let i = 0; i < displayValues.length; i++) {
             const value = displayValues[i];
@@ -516,7 +507,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             chartHTML += `
                 <div class="chart-bar ${isUsed ? (isImportant ? 'used-important' : 'used') : 'unused'}" 
-                     style="height: ${height}%" 
+                     style="height: ${height}% ;" 
                      title="奇异值 ${i+1}: ${value.toFixed(4)}${isUsed ? ' (已使用)' : ' (未使用)'}">
                 </div>
             `;
@@ -526,7 +517,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 添加图表说明
         chartHTML += `
-            <div class="chart-legend">
+            <div class="chart-legend" style="background:transparent;">
                 
                 <span class="legend-item">
                     <span class="legend-color used"></span>
