@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- 创新点:
+        对基于奇异值分解的图片压缩进行可视化,全面呈现压缩比率与图像质量的关系,
+        通过直观的图像展示和交互式的百分比选择器,
+        让用户可以直观地感受到奇异值分解在图像压缩中的实际应用效果。
+        通过对比原图和压缩后图像的清晰度和细节保留情况,
+        让用户更好地理解奇异值分解的实际应用价值。
+        配以数学理论的note,
+        让用户在使用过程中感受到奇异值分解的实际应用,从而让用户感受到线性代数的美
+        促进学习与实践结合-->
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVD图像压缩器 - 基于奇异值分解的图像压缩工具</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/homepage.css">
+</head>
+<body class='homepage'>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>SVD Image Compressor</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">首页</a>
+                <a href="#project" class="nav-link">项目说明</a>
+                <a href="#acknowledgments" class="nav-link">致谢</a>
+                <a href="main.html" class="nav-link">在线演示</a>
+                <a href="pages/svd-theory.html" class="nav-link">理论详解</a>
+            </div>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主区域 -->
+    <section id="home" class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    基于<span class="highlight">奇异值分解</span>的
+                    <br>智能图像压缩工具
+                </h1>
+                <p class="hero-subtitle">
+                    探索线性代数的力量，体验SVD算法如何在保持图像质量的同时实现高效压缩
+                </p>
+                <div class="hero-buttons">
+                    <a href="main.html" class="btn btn-primary">立即体验</a>
+                    <a href="pages/svd-theory.html" class="btn btn-secondary">了解原理</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="svd-animation">
+                    <div class="matrix-decomposition">
+                        <div class="matrix original">A</div>
+                        <div class="equals">=</div>
+                        <div class="matrix u">U</div>
+                        <div class="matrix sigma">Σ</div>
+                        <div class="matrix v">V<sup>T</sup></div>
+                    </div>
+                    <div class="compression-demo">
+                        <div class="image-placeholder original-img">
+                            <span>原图</span>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="image-placeholder compressed-img">
+                            <span>压缩后</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目说明 -->
+    <section id="project" class="project-section">
+        <div class="container">
+            <h2 class="section-title">项目说明</h2>
+            <div class="project-content">
+                <div class="author-info">
+                    <p><b>糖糖带你体验SVD分解</b> </p>
+                    <p>作者:  <a href="https://3b87dc08.quartz-b5m.pages.dev/" target="_blank" style="color: #00bcd4 !important; text-decoration: line-through; border-bottom: 1px dotted #4dd0e1 !important;">🔗刘有度</a>|阿P你走开!是超级可爱的天使糖糖啦! ♡(´∀｀*)♡ <span class="date">2025年5月31日</span></p>
+                </div>
+                <div class="project-description">
+                    <p>
+                        来到国科大这样一所重视数理基础的超棒(?)大学之后，主包发现基础代数课程的老师们有的是算子派背景(・∀・)，强调通过算子这样更加本质而抽象的工具去严谨地学习数学定理，虽然在<strong>直观性和应用性</strong>上稍稍有点点欠缺╮(╯▽╰)╭。按照某线代A班级的讲义学习时，主包发现讲义对奇异值分解讲得比较粗略(´･ω･`)，新手学习时容易把奇异值分解当成一般路过的出题考点，却忽略了它在现实情景中巨大的应用价值！实际上，奇异值分解可是被称为"线性代数皇冠上的明珠"的超厉害算法✨！它在主包最近在学习的机器学习、模式识别等多个领域，都具有重大的实用价值(´∀｀*)♡
+                    </p>
+                    <p>
+                        因此，主包觉得，可视化奇异值分解的核心应用场景——图片压缩，在我们美丽的国科大，是一项超有必要的科普工作(´∀｀)♡，希望这个萌萌哒小网页能帮助到有志于从事人工智能/图形学等领域的小伙伴们(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ 让大家一起感受数学的魅力吧！(｡♥‿♥｡)
+                    </p>
+                </div>
+                <div class="project-highlight">
+                    <div class="highlight-icon">💎</div>
+                    <h3>奇异值分解：线性代数皇冠上的明珠✨ (◕‿◕)♡</h3>
+                    <p>从抽象理论到实际应用的完美桥梁～让数学变得超有趣！ヾ(≧▽≦*)o</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 致谢 -->
+    <section id="acknowledgments" class="acknowledgments-section">
+        <div class="container">
+            <h2 class="section-title">感謝の気持ち♡ (致谢)</h2>
+            <div class="acknowledgments-grid">
+                <div class="acknowledgment-card">
+                    <div class="ack-icon">👨‍🏫</div>
+                    <h4>助教老师杜昱,胡格致さん</h4>
+                    <p>本当にありがとうございます！杜昱sensai提供的珍贵信息让主包确认了创新点～胡格致仙贝也非常热心,红豆泥超级helpful的说(｡♥‿♥｡)</p>
+                </div>
+                
+                <div class="acknowledgment-card">
+                    <div class="ack-icon">📺</div>
+                    <h4>晓之车高山先生♪</h4>
+                    <p>B站の神Up主"晓之车高山老师"的图说矩阵系列视频<a href="https://www.bilibili.com/video/BV1ExWxesEVf/?spm_id_from=333.337.search-card.all.click" target="_blank" class="video-link">奇异值分解</a>真的是太素晴らしい了！帮助主包理解SVD并提供了超棒的可视化灵感源泉✨ ありがとうございます～</p>
+                </div>
+                
+                <div class="acknowledgment-card">
+                    <div class="ack-icon">🤖</div>
+                    <h4>GitHub Copilot大大♡</h4>
+                    <p>主包实现奇异值分解的初版算法时遇到了计算精度不够的大ピンチ！10%以后的奇异值就因为计算精度问题自动变成0了呜呜(´；ω；`)...感谢copilot大大对算法精度的神级优化！本当に助かりました～</p>
+                </div>
+                
+                <div class="acknowledgment-card">
+                    <div class="ack-icon">🧠</div>
+                    <h4>AI助手たち♪</h4>
+                    <p>心から感謝！grok3/claude4等AI小伙伴们不厌其烦地回复主包的基础语法问题，copilot自动填充log信息也是超级便利的说～极大地方便了调试工作，让项目顺利完成(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SVD Image Compressor</h3>
+                    <p>探索线性代数在图像处理中的应用，体验数学之美。</p>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="main.html">图像压缩工具</a></li>
+                        <li><a href="pages/svd-theory.html">理论详解</a></li>
+                        <li><a href="#project">项目说明</a></li>
+                        <li><a href="#acknowledgments">致谢</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>关键词</h4>
+                    <ul>
+                        <li>奇异值分解（SVD）</li>
+                        <li>矩阵低秩近似</li>
+                        <li>图像压缩算法</li>
+                        <li>线性代数应用</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>关于项目</h4>
+                    <p>本项目是一个教学性质的SVD图像压缩演示工具，帮助理解线性代数在实际应用中的价值。</p>
+                    
+                    <div class="external-links" style="margin-top: 15px; padding: 12px; background: rgba(255, 255, 255, 0.05); border-radius: 6px; border-left: 3px solid #ff69b4;">
+                        <h5 style="color: #ff69b4; margin-bottom: 8px; font-size: 0.9rem;">🎨 背景图素材来源</h5>
+                        <p style="font-size: 0.8rem; line-height: 1.4; color: #bdc3c7; margin: 0;">
+                            背景是主包用爱发电制作的长图，原材料见<a href="https://angelkawaii.com/ch/" target="_blank" style="color: #ff69b4; text-decoration: none; border-bottom: 1px dotted #ff69b4;">超天酱官网</a>
+                        </p>
+                    </div>
+                    
+                    <div class="ai-disclosure" style="margin-top: 20px; padding: 15px; background: rgba(255, 255, 255, 0.1); border-radius: 8px; border-left: 3px solid #ffd700;">
+                        <h5 style="color: #ffd700; margin-bottom: 10px; font-size: 0.9rem;">🤖 AI使用声明</h5>
+                        <ul style="font-size: 0.8rem; line-height: 1.4; color: #bdc3c7; list-style: none; padding: 0;">
+                            <li style="margin-bottom: 6px;">• app.js中使用了AI生成的对数空间算法防止奇异值下溢，以优化奇异值分解算法的精度和性能</li>
+                            <li style="margin-bottom: 6px;">• app.js中使用了AI生成的数值稳定性检查函数，以方便调试</li>
+                            <li style="margin-bottom: 6px;">• JavaScript中使用Copilot自动填充的log信息，以便于调试和优化代码</li>
+                            <li style="margin-bottom: 6px;">• CSS样式是打样后交给AI"复制粘贴"到其他元素，以节省开发时间</li>
+                            <li style="margin-bottom: 0;">• homepage.js中使用了AI生成的例子动画效果，创造了一些粒子对象以增强页面动态效果</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="footer-bottom">            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="scripts/homepage.js"></script>
+</body>
+</html>
